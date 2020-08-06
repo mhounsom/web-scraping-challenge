@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</head>
+
+<body style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
+  <div clas="container">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+      
+    <div class="row">
+      <div class="col-md-12 col-md-offset-1">
+        <h3>Latest Mars News</h3>
+        <h4>{{mars_dic.news_title}}</h4>
+        <p>{{mars_dic.news_p}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-1">
+        <h3>Featured Mars Image</h3>
+        <img src={{mars_dic.featured_image_url}} class="img-responsive img-rounded" alt="Mars Image">
+      </div>
+      <div class="col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>Current Weather on Mars</h4>
+            <p>{{mars_dic.updated_mars_weather}}</p>
+          </div>
+        </div>
+        <div>
+          {{mars_dic.html_mars_cleaned | safe}}
+        </div>
+      </div>
+    </div>
+    
+    <h3 style="padding-top: 25px; margin-top: 25px; text-align: center;">Mars Hemispheres</h3>
+    <div class="card-deck">
+        <hr>
+        <div class="col-md-10 col-md-offset-1">
+            <div class="row">
+                {% for image in mars_dic.hemis_urls %}
+                <div class="col-md-6">
+                    <div class="card text-white bg-dark" style="margin: 30px; border: 2px solid rgb(70, 70, 70); padding: 5px; border-radius: 6px;">
+                        <img class="card-img-top img-responsive img-rounded" src="{{ image.img_url }}" />
+                        <div class="card-body">
+                            <p class="card-text" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold; color: rgb(34, 34, 34);">{{ image.title }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>    
+  </div>
+</body>
+</html>
